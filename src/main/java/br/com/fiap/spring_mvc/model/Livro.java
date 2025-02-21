@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "TB_LIVRO")
 @Data
@@ -19,4 +21,8 @@ public class Livro {
     @Column(name = "Category")
     @Enumerated(EnumType.STRING)
     private Categoria categoria;
+    @Column(name = "Price")
+    private BigDecimal preco;
+    @Column(name = "isbn")
+    private String isbn;
 }
