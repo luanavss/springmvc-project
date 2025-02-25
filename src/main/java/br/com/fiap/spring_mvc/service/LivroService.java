@@ -7,6 +7,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class LivroService {
     @Autowired
@@ -15,6 +18,18 @@ public class LivroService {
     public Livro salvarLivro(LivroRequest livroRequest) {
         Livro livro = requestToLivro(livroRequest);
         return livroRepository.save(livro);
+    }
+
+    public void atualizarLivro(Long id, LivroRequest livroRequest){
+        Livro livro = buscarLivro(id);
+        if (livro != null) {
+            BeanUtils.copyProperties(livroRequest, livro);
+            livroRepository.save(livro);
+        }
+    }
+
+    public void deletarLivro(Long id){
+        livroRepository.deleteById(id);
     }
 
     public Livro requestToLivro(LivroRequest livroRequest){
@@ -27,4 +42,20 @@ public class LivroService {
         livro.setIsbn(livroRequest.getIsbn());
         return livro;
     }
+
+    public LivroRequest livroToRequest(Livro livro){
+        LivroRequest livroRequest = new LivroRequest();
+        BeanUtils.copyProperties(livro, livroRequest);
+        return livroRequest;
+    }
+
+    public List<Livro> buscarLivros() {
+        return livroRepository.findAll();
+    }
+
+    public Livro buscarLivro(Long id) {
+        Optional<Livro> livro = livroRepository.findById(id);
+        return livro.orElse(null);
+    }
+
 }
