@@ -5,16 +5,16 @@ import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 
 public class LivroRequest {
-        @NotBlank(message = "O título é obrigatório.")
+        @NotBlank(message = "{titulo.not.blank}")
         private String titulo;
-        @NotBlank(message = "O autor é obrigatório.")
-        @Size(min = 4, max = 150, message = "O nome do autor deve ter entre 4 e 150 caracteres.")
+        @NotBlank(message = "{autor.not.blank}.")
+        @Size(min = 4, max = 150, message = "{autor.size}")
         private String autor;
-        @NotNull(message = "A categoria é obrigatória.")
+        @NotNull(message = "{categoria.not.null}")
         private Categoria categoria;
-        @DecimalMin(value = "0.99", message = "O preço deve ser maior que R$0.99")
+        @DecimalMin(value = "0.99", message = "{preco.min}")
         private BigDecimal preco;
-        @Pattern(regexp = "^970\\d{7}$|^970\\d{10}$", message = "O ISBN deve seguir o padrão internacional.")
+        @Pattern(regexp = "^970\\d{7}$|^970\\d{10}$", message = "{isbn.pattern}")
         private String isbn;
 
         public String getTitulo() {
