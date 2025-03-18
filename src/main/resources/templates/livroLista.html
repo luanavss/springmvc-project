@@ -11,40 +11,42 @@
 <body>
     <div th:replace="~{fragments/header.html :: header}"></div>
     <div class="main_content">
-        <h2>Lista de livros cadastrados</h2>
+        <h2><span th:text="${#messages.msg('livros.cadastrados')}"></span></h2>
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Título</th>
-                    <th>Ações</th>
+                    <th><span th:text="${#messages.msg('titulo.cadastrado')}"></span></th>
+                    <th><span th:text="${#messages.msg('acoes.cadastro')}"></span></th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="livro : ${listaLivros}">
                     <td th:text="${livro.id}">ID</td>
-                    <td th:text="${livro.titulo}">Título</td>
+                    <td th:text="${livro.titulo}"><span th:text="${#messages.msg('titulo.cadastrado')}"></span></td>
                     <td>
-                        <button th:attr="onclick=|showModal('infModal' + ${livro.id})|">Detalhes</button>
+                        <button th:attr="onclick=|showModal('infModal' + ${livro.id})|">
+                            <span th:text="${#messages.msg('detalhes.livro')}"></span>
+                        </button>
                     </td>
                 </tr>
             </tbody>
         </table>
         <div th:each="livro : ${listaLivros}" th:attr="id=${'infModal' + livro.id}" style="display: none;">
             <br>
-            <h3>Detalhes do livro</h3>
+            <h3><span th:text="${#messages.msg('attr.detalhes.livro')}"></span></h3>
             <p>
                 <strong>ID:</strong> <span th:text="${livro.id}"></span><br>
-                <strong>TITULO:</strong> <span th:text="${livro.titulo}"></span><br>
-                <strong>AUTOR:</strong> <span th:text="${livro.autor}"></span><br>
-                <strong>CATEGORIA:</strong> <span th:text="${livro.categoria.descricao}"></span><br>
-                <strong>PREÇO:</strong> <span th:text="${livro.preco}"></span><br>
+                <strong><span th:text="${#messages.msg('titulo.cadastrado')}"></span>:</strong> <span th:text="${livro.titulo}"></span><br>
+                <strong><span th:text="${#messages.msg('autor.cadastrado')}"></span>:</strong> <span th:text="${livro.autor}"></span><br>
+                <strong><span th:text="${#messages.msg('categoria.cadastrada')}"></span>:</strong> <span th:text="${livro.categoria.descricao}"></span><br>
+                <strong><span th:text="${#messages.msg('preco.cadastrado')}"></span>:</strong> <span th:text="${livro.preco}"></span><br>
                 <strong>ISBN:</strong> <span th:text="${livro.isbn}"></span><br>
-                <a th:href="@{/livro/edicao/{id}(id = ${livro.id})}">Editar</a>
+                <a th:href="@{/livro/edicao/{id}(id = ${livro.id})}"><span th:text="${#messages.msg('editar.cadastro')}"></span></a>
                 <span> | </span>
-                <a th:href="@{/livro/deletar/{id}(id = ${livro.id})}">Deletar</a>
+                <a th:href="@{/livro/deletar/{id}(id = ${livro.id})}"><span th:text="${#messages.msg('deletar.cadastro')}"></span></a>
             </p>
-            <button th:attr="onclick=|hideModal('infModal' + ${livro.id})|">Fechar</button>
+            <button th:attr="onclick=|hideModal('infModal' + ${livro.id})|"><span th:text="${#messages.msg('botao.fechar')}"></span></button>
         </div>
     </div>
     <div th:replace="~{fragments/footer.html :: footer}"></div>
