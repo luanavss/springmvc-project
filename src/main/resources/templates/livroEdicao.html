@@ -8,37 +8,39 @@
   <div th:replace="~{fragments/header.html :: header}"></div>
   <div>
       <form method="post" th:action="@{/livro/editar/{id}(id = ${idLivro})}" th:object="${livro}">
-        <h2>Editar Livro</h2>
+        <h2><span th:text="${#messages.msg('editar.livro')}"></span></h2>
         <input type="hidden" th:field="${idLivro}">
         <br>
         <table>
           <tr>
-            <td>Título:</td>
+            <td><span th:text="${#messages.msg('titulo.cadastrado')}"></span></td>
             <td><input type="text" th:field="*{titulo}"></td>
           </tr>
           <tr>
-            <td>Autor:</td>
+            <td><span th:text="${#messages.msg('autor.cadastrado')}"></span></td>
             <td><input type="text" th:field="*{autor}"></td>
           </tr>
           <tr>
-            <td>Categoria:</td>
+            <td><span th:text="${#messages.msg('categoria.cadastrada')}"></span></td>
             <td>
               <select name="categoria" th:field="*{categoria}">
-                <option name="ROMANCE" value="ROMANCE">Romance</option>
-                <option name="FICCAO" value="FICCAO">Ficção</option>
-                <option name="FANTASIA" value="FANTASIA">Fantasia</option>
+                <option name="ROMANCE" value="ROMANCE"><span th:text="${#messages.msg('tipo.romance')}"></span></option>
+                <option name="FICCAO" value="FICCAO"><span th:text="${#messages.msg('tipo.ficcao')}"></span></option>
+                <option name="FANTASIA" value="FANTASIA"><span th:text="${#messages.msg('tipo.fantasia')}"></span></option>
               </select>
             </td>
           </tr>
           <tr>
-            <td>Preço:</td>
+            <td><span th:text="${#messages.msg('preco.cadastrado')}"></span></td>
             <td><input type="text" th:field="*{preco}"></td>
           </tr>
           <tr>
             <td>ISBN:</td>
             <td><input type="text" th:field="*{isbn}"></td>
           </tr>
-          <tr><td colspan="2"><input type="submit" value="Atualizar"></td></tr>
+          <tr>
+            <button type="submit"><span th:text="${#messages.msg('atualizar.livro')}"></span></button>
+          </tr>
         </table>
       </form>
   </div>
